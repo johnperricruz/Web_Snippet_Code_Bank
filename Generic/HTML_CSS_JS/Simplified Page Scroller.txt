@@ -1,0 +1,35 @@
+---------------------JQUERY---------------------
+
+function pageScroller(){
+    $x(window).scroll(function () {
+        if ($x(this).scrollTop() > 100) {
+            $x('.scrollup').fadeIn();
+        } else {
+            $x('.scrollup').fadeOut();
+        }
+    });
+
+    $x('.scrollup').click(function () {
+        $x("html, body").animate({
+            scrollTop: 0
+        }, 600);
+        return false;
+    });
+}
+
+
+
+-------------------------CSS-----------------------
+.scrollup {
+        width: 40px;
+        height: 40px;
+        position: fixed;
+        bottom: 50px;
+        right: 100px;
+        display: none;
+        text-indent: -9999px;
+        background: url('icon_top.png') no-repeat;
+        background-color: #000;
+}
+--------------------------HTML---------------------
+<a href="#" class="scrollup">Scroll</a>  

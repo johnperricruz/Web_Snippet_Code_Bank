@@ -1,0 +1,7 @@
+function animatedScroll(_select,_dest){
+	$(_select).click(function(){
+				$('html, body').animate({
+				scrollTop: $("_dest").offset().top
+		}, 2000);
+	});
+}
