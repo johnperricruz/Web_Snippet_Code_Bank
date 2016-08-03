@@ -7,12 +7,13 @@ This code bank is made exclusively for :
 	- Generic -- PHP -- HTML -- CSS -- JS
   
 
----
+--
 
 WP Modules : 
 	-/custom_blog_template
+	-/pagination
 
----
+--
 
 Magento Modules : 
 	- /functions = Customized Helper Class
