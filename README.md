@@ -11,7 +11,7 @@ This code bank is made exclusively for :
 
 WP Modules : 
 	-/custom_blog_template
-	-/pagination
+	-/custom_functions/pagination
 
 --
 
