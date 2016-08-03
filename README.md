@@ -14,13 +14,17 @@ WP Modules :
 ---
 
 Magento Modules : 
-  - Customized Helper Class
+  - /functions = Customized Helper Class
+  - empty.sql = Empty Backend Data
+---
+
+Generic Modules : 
+
+PHP
+
+HTML -- CSS -- JS
 
 ---
-Generic Modules : 
-  - PHP
-  -  HTML -- CSS -- JS
-  ---
 
 
 
