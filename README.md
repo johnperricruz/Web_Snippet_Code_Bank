@@ -28,7 +28,7 @@ PHP
 HTML -- CSS -- JS
 
 - Sticky Header on scroll
-- JjQuery Custom Center Pop up
+- jQuery Custom Center Pop up
 - Animated SCroll to Element
 - Simplified Page Scroller
 
