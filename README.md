@@ -5,4 +5,7 @@
 #MAGENTO
 
 #GENERIC
-
+----PHP
+----HTML
+----CSS
+----JS
