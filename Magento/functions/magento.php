@@ -5,6 +5,14 @@
 * EMAIL    : johnperricruz@gmail.com		   *
 * @VERSION : v1.2							   *
 ************************************************/
+
+/************************************************************************************
+	On head.php
+	<?php require_once Mage::getBaseDir('base').DS.'functions/'.DS.'helper.php'; ?>
+	
+************************************************************************************/
+
+
 require_once(''.dirname(__DIR__).'/app/code/core/Mage/Catalog/Model/Product.php');
 class Magento extends Mage_Catalog_Model_Product{
 	
