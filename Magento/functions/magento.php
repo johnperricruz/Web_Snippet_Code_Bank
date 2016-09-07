@@ -136,12 +136,8 @@ class Magento extends Mage_Catalog_Model_Product{
 	*/
 	public function isLoggedIn(){
 		$action = $this->helper('customer')->isLoggedIn();
-		if($action){
-			return true;
-		}
-		else{
-			return false;
-		}
+		if($action){ return true;}
+		else{ return false;}
 	}
 	public function getAccountUrl($mode){
 		$link = "#";
