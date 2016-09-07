@@ -1,10 +1,10 @@
 /***********TESTED PLUGINS**************/
 *****************************************
 
-1. SLIDER
+1. Slider
 	- Revolution slider = (https://revolution.themepunch.com/)
 	
-2. GALLERY
+2. Gallery
 	- Foogallery (https://wordpress.org/plugins/foogallery/)
 	- Foo gallery lightbox ext. (https://wordpress.org/plugins/foobox-image-lightbox/)
 	
@@ -20,6 +20,7 @@
 5. Security
 	
 6. Optimization
+		- W3 Total Cache = (https://wordpress.org/plugins/w3-total-cache/)
 
 7. CMS
 	7.1 Page Builder 
@@ -27,3 +28,6 @@
 	
 8. SEO
 	- Yoast = https://wordpress.org/plugins/wordpress-seo/
+	
+9. Contact Forms
+	- Contact Form 7
