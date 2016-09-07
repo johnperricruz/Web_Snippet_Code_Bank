@@ -1,0 +1,29 @@
+/***********TESTED PLUGINS**************/
+*****************************************
+
+1. SLIDER
+	- Revolution slider = (https://revolution.themepunch.com/)
+	
+2. GALLERY
+	- Foogallery (https://wordpress.org/plugins/foogallery/)
+	- Foo gallery lightbox ext. (https://wordpress.org/plugins/foobox-image-lightbox/)
+	
+3. Ecommerce
+	- woocommerce (https://wordpress.org/plugins/woocommerce/installation/)
+	
+	3.1 Advanced ecommerce feature 
+		- WooCommerce One Page Shopping (https://codecanyon.net/item/woocommerce-one-page-shopping/7158470)
+	
+4. Third party Integration
+		- Cloudflare SSL Integration = (https://wordpress.org/plugins/cloudflare-flexible-ssl/)
+		
+5. Security
+	
+6. Optimization
+
+7. CMS
+	7.1 Page Builder 
+	Page Builder = (https://wordpress.org/plugins/siteorigin-panels/)
+	
+8. SEO
+	- Yoast = https://wordpress.org/plugins/wordpress-seo/
