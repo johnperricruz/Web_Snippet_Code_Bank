@@ -1,6 +1,9 @@
 <!--LAYOUT CHANGES -->
 
-<!-- 1. Checkout page (local.xml) -->
+<!-- 
+Checkout page (local.xml) 
+1. Put all of these on local.xml   = /public_html/app/design/frontend/[package]/[theme]/layout/local.xml
+-->
 
 <!--Onepage Checkout Page-->
 <checkout_onepage_index>
