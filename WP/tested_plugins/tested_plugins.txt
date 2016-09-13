@@ -30,4 +30,4 @@
 	- Yoast = https://wordpress.org/plugins/wordpress-seo/
 	
 9. Contact Forms
-	- Contact Form 7
+	- Contact Form 7 
