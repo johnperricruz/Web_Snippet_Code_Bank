@@ -3,7 +3,7 @@
 * AUTHOR   : John Perri Cruz				   *
 * WEBSITE  : https://www.johnperricruz.com     *
 * EMAIL    : johnperricruz@gmail.com		   *
-* @VERSION : v1.2							   *
+* @VERSION : v1.3							   *
 ************************************************/
 
 /************************************************************************************
@@ -38,7 +38,7 @@ class Magento extends Mage_Catalog_Model_Product{
 		$_helper = Mage::helper('catalog/category');
 		$_categories = $_helper->getStoreCategories();
 		$return = "";
-		$return = '<div id="cssmenu" class="category-tree">';
+		$return = '<div id="cssmenu" class="mobile category-tree">';
 			$return .= '<ul>';
 				foreach($_categories as $_category){
 					$_category = Mage::getModel('catalog/category')->load($_category->getId());
@@ -110,6 +110,7 @@ class Magento extends Mage_Catalog_Model_Product{
 		$collection = Mage::getResourceModel('catalog/product_collection');
 		$collection->addCategoryFilter($category_model);  							  //category filter
 		$collection->addAttributeToFilter('status',1);                                //only enabled product
+		$collection->addAttributeToFilter('visibility',4); 
 		$collection->addAttributeToSelect(array('description','name','url','small_image','price')); //add product attribute to be fetched
 		//$collection->getSelect()->order('rand()');                                  //Uncomment for random fetching of product in the homepage.
 		$collection->addStoreFilter(); 
@@ -122,10 +123,10 @@ class Magento extends Mage_Catalog_Model_Product{
 	public function getFormKey(){
 		return Mage::getSingleton('core/session')->getFormKey(); 
 	}	
-	public function getWishListUrl($product_iD){
+	public function addToWishlist($product_iD){
 		return "/wishlist/index/add/product/".$product_iD."/form_key/".Mage::getSingleton('core/session')->getFormKey()."/";
 	}
-	public function getCompareUrl($product_iD){
+	public function addToCompare($product_iD){
 		return "/compare/index/add/product/".$product_iD."/form_key/".Mage::getSingleton('core/session')->getFormKey()."/";
 	}	
 	public function getProductImageUrl($prod,$size){
@@ -176,6 +177,9 @@ class Magento extends Mage_Catalog_Model_Product{
 	}
 	public function getCurrencySymbol(){
 		return Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())->getSymbol();
+	}
+	public function getNewsletter(){
+		return $this->getChildHtml('newsletter');
 	}
 	/*
 	* Test
