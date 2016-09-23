@@ -90,14 +90,14 @@ class Magento extends Mage_Catalog_Model_Product{
 		}
 	}
 	public function getCartCount(){
-		$count = Mage::helper('checkout/cart')->getCart()->getItemsCount();
+		$count = Mage::helper('checkout/cart')->getCart()->getSummaryCount();
 		return $count;
 	}
-	public function getCartUrl(){
+	public function getCartUrl(){ 
 		$link = Mage::helper('checkout/cart')->getCartUrl();
 		return $link;
 	}
-	
+	 
 	/*
 	* Product
 	*/
