@@ -3,7 +3,7 @@
 * AUTHOR   : John Perri Cruz				   *
 * WEBSITE  : https://www.johnperricruz.com     *
 * EMAIL    : johnperricruz@gmail.com		   *
-* @VERSION : v1.3							   *
+* @VERSION : v1.2							   *
 ************************************************/
 
 /************************************************************************************
@@ -90,14 +90,17 @@ class Magento extends Mage_Catalog_Model_Product{
 		}
 	}
 	public function getCartCount(){
-		$count = Mage::helper('checkout/cart')->getCart()->getSummaryCount();
+		$count = "0";
+		if(!empty(Mage::helper('checkout/cart')->getSummaryCount())){
+			$count = Mage::helper('checkout/cart')->getSummaryCount();
+		}
 		return $count;
 	}
-	public function getCartUrl(){ 
+	public function getCartUrl(){
 		$link = Mage::helper('checkout/cart')->getCartUrl();
 		return $link;
 	}
-	 
+	
 	/*
 	* Product
 	*/
@@ -180,6 +183,12 @@ class Magento extends Mage_Catalog_Model_Product{
 	}
 	public function getNewsletter(){
 		return $this->getChildHtml('newsletter');
+	}
+	public function getCompareLink(){
+		return '/catalog/product_compare/index';
+	}
+	public function getWishlistLink(){
+		return '/wishlist';
 	}
 	/*
 	* Test
