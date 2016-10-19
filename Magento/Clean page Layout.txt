@@ -66,16 +66,19 @@ Step 3 : create config.xml file app/code/local/Magentomaster/Template/etc/config
   <global>
     <page>
       <layouts>
+
         <category translate="label">
           <label>Category Default Template</label>
           <template>page/category-default.phtml</template>
           <layout_handle>category</layout_handle>
         </category>
+
         <homepage translate="label">
           <label>Homepage Template</label>
           <template>page/homepage.phtml</template>
           <layout_handle>homepage</layout_handle>
         </homepage>
+
         <cms translate="label">
           <label>CMS Page Template</label>
           <template>page/cms-page.phtml</template>
