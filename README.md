@@ -31,7 +31,8 @@ HTML -- CSS -- JS
 - jQuery Custom Center Pop up
 - Animated SCroll to Element
 - Simplified Page Scroller
-
+- Owl Slider
+- Paypal Donation Template
 
 ---
 
