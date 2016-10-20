@@ -3,7 +3,7 @@
 * AUTHOR   : John Perri Cruz				   *
 * WEBSITE  : https://www.johnperricruz.com     *
 * EMAIL    : johnperricruz@gmail.com		   *
-* @VERSION : v1.2							   *
+* @VERSION : v1.3							   *
 ************************************************/
 
 /************************************************************************************
@@ -20,22 +20,22 @@ class Magento extends Mage_Catalog_Model_Product{
 	* Categories
 	*/
 	public function getSubCategoryViaCatID($catID){
-		$children = Mage::getModel('catalog/category')->getCategories($catID);
+		$children = Mage::getModel('catalog/category')->load($catID)->getChildrenCategories();
 		$active="";
 		$ret="";
 		$ret='<ul>';
 			foreach ($children as $category) {
 				if(self::getCategoryOnCategoryPage() == $category->getName()){
-					$ret .= '<li class="active"><a href="'.$category->getProductUrl().'">'.$category->getName().'</a></li>';
+					$ret .= '<li class="active"><a href="'.$category->getUrl().'">'.$category->getName().' ('.$category->getProductCount().')</a></li>';
 				}else{
-					$ret .= '<li><a href="'.$category->getProductUrl().'">'.$category->getName().'</a></li>';
+					$ret .= '<li><a href="'.$category->getUrl().'">'.$category->getName().' ('.$category->getProductCount().')</a></li>';
 				}
 			}
 		$ret .=  '</ul>';
 		return $ret;
 	}	
 	public function getCategoryTree(){
-		$_helper = Mage::helper('catalog/category');
+		$_helper = Mage::helper('catalog/category'); 
 		$_categories = $_helper->getStoreCategories();
 		$return = "";
 		$return = '<div id="cssmenu" class="mobile category-tree">';
@@ -108,6 +108,9 @@ class Magento extends Mage_Catalog_Model_Product{
 	public function getRelatedProducts($file){
 		return $this->getLayout()->createBlock("catalog/product_list_related")->setTemplate("catalog/product/list/".$file."")->toHtml();
 	}	
+	public function getUpsellProducts($file){
+		return $this->getLayout()->createBlock("catalog/product_list_upsell")->setTemplate("catalog/product/list/".$file."")->toHtml();
+	}	
 	public function getProductsViaCatID($category_id){
 		$category_model = Mage::getModel('catalog/category')->load($category_id);     //get category model
 		$collection = Mage::getResourceModel('catalog/product_collection');
@@ -117,7 +120,7 @@ class Magento extends Mage_Catalog_Model_Product{
 		$collection->addAttributeToSelect(array('description','name','url','small_image','price')); //add product attribute to be fetched
 		//$collection->getSelect()->order('rand()');                                  //Uncomment for random fetching of product in the homepage.
 		$collection->addStoreFilter(); 
-		return $collection;
+		return $collection; 
 		$collection->clear();
 	}
 	public function getProductViaID($product_id){
@@ -130,7 +133,7 @@ class Magento extends Mage_Catalog_Model_Product{
 		return "/wishlist/index/add/product/".$product_iD."/form_key/".Mage::getSingleton('core/session')->getFormKey()."/";
 	}
 	public function addToCompare($product_iD){
-		return "/compare/index/add/product/".$product_iD."/form_key/".Mage::getSingleton('core/session')->getFormKey()."/";
+		return "/catalog/product_compare/add/product/".$product_iD."/uenc/aHR0cDovL2Nvb2tpZXMucHJpbWV2aWV3LmNvbS9jb29raWVzLWFuZC1icm93bmllcy1naWZ0cy1zaWx2ZXItdGFsbC10aW4taGFydmVzdC5odG1s/form_key/".Mage::getSingleton('core/session')->getFormKey()."/";
 	}	
 	public function getProductImageUrl($prod,$size){
 		return $this->helper('catalog/image')->init($prod, 'small_image')->resize($size);
@@ -177,6 +180,9 @@ class Magento extends Mage_Catalog_Model_Product{
 	*/
 	public function getLayout($file){
 		return $this->getLayout()->createBlock('core/template')->setTemplate($file)->toHtml();
+	}
+	public function getStaticBlock($identifier){
+		return $this->getLayout()->createBlock('cms/block')->setBlockId($identifier)->toHtml(); 
 	}
 	public function getCurrencySymbol(){
 		return Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())->getSymbol();
