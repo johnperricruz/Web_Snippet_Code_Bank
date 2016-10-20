@@ -195,7 +195,7 @@ class Magento extends Mage_Catalog_Model_Product{
 	}
 	public function getWishlistLink(){
 		return '/wishlist';
-	}
+	} 
 	/*
 	* Test
 	*/
