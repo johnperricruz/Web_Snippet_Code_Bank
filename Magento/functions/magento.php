@@ -3,7 +3,7 @@
 * AUTHOR   : John Perri Cruz				   *
 * WEBSITE  : https://www.johnperricruz.com     *
 * EMAIL    : johnperricruz@gmail.com		   *
-* @VERSION : v1.3							   *
+* @VERSION : v1.2							   *
 ************************************************/
 
 /************************************************************************************
@@ -133,7 +133,9 @@ class Magento extends Mage_Catalog_Model_Product{
 		return "/wishlist/index/add/product/".$product_iD."/form_key/".Mage::getSingleton('core/session')->getFormKey()."/";
 	}
 	public function addToCompare($product_iD){
-		return "/catalog/product_compare/add/product/".$product_iD."/uenc/aHR0cDovL2Nvb2tpZXMucHJpbWV2aWV3LmNvbS9jb29raWVzLWFuZC1icm93bmllcy1naWZ0cy1zaWx2ZXItdGFsbC10aW4taGFydmVzdC5odG1s/form_key/".Mage::getSingleton('core/session')->getFormKey()."/";
+		//return "/catalog/product_compare/add/product/".$product_iD."/uenc/aHR0cDovL2Nvb2tpZXMucHJpbWV2aWV3LmNvbS9jb29raWVzLWFuZC1icm93bmllcy1naWZ0cy1zaWx2ZXItdGFsbC10aW4taGFydmVzdC5odG1s/form_key/".Mage::getSingleton('core/session')->getFormKey()."/";
+		$product_obj = Mage::getModel('catalog/product')->load($product_iD);
+		return Mage::helper('catalog/product_compare')->getAddUrl($product_obj);
 	}	
 	public function getProductImageUrl($prod,$size){
 		return $this->helper('catalog/image')->init($prod, 'small_image')->resize($size);
@@ -195,7 +197,7 @@ class Magento extends Mage_Catalog_Model_Product{
 	}
 	public function getWishlistLink(){
 		return '/wishlist';
-	} 
+	}
 	/*
 	* Test
 	*/
