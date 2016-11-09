@@ -196,7 +196,10 @@ class Magento extends Mage_Catalog_Model_Product{
 		return '/catalog/product_compare/index';
 	}
 	public function getWishlistLink(){
-		return '/wishlist';
+		return '/wishlist'; 
+	}
+	public function newsletterSuccessRedirect($cms){
+		return '<input type="hidden" name="uenc" value="'.Mage::helper('core')->urlEncode(Mage::app()->getStore()->getBaseUrl().$cms).'"/>';
 	}
 	/*
 	* Test
