@@ -1,0 +1,37 @@
+/**
+ * Woocommerce CC Field Hook
+ */
+ // define the woocommerce_credit_card_form_fields callback 
+function filter_woocommerce_credit_card_form_fields( $default_fields, $this_id ) { 
+		$default_fields = array(
+			'card-number-field' => '<p class="form-row form-row-wide">
+				<label for="' . esc_attr( $this_id ) . '-card-number">' . __( 'Card Number', 'woocommerce' ) . ' <span class="required">*</span></label>
+				<input id="' . esc_attr( $this_id ) . '-card-number" class="input-text wc-credit-card-form-card-number" inputmode="numeric" autocomplete="cc-number" autocorrect="no" autocapitalize="no" spellcheck="no" type="tel" placeholder="&bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull;" name="'.esc_attr( $this_id ).'-card-number" />
+			</p>',
+			'card-expiry-field' => '<p class="form-row form-row-first">
+				<label for="' . esc_attr( $this_id ) . '-card-expiry">' . __( 'Expiry (MM/YY)', 'woocommerce' ) . ' <span class="required">*</span></label>
+				<input id="' . esc_attr( $this_id ) . '-card-expiry" class="input-text wc-credit-card-form-card-expiry" inputmode="numeric" autocomplete="cc-exp" autocorrect="no" autocapitalize="no" spellcheck="no" type="text" placeholder="' . esc_attr__( 'MM / YY', 'woocommerce' ) .'" name="'.esc_attr( $this_id ).'-card-expiry" />
+			</p>',	
+			'card-cvc-field' => '<p class="form-row form-row-first">
+				<label for="' . esc_attr( $this_id ) . '-card-cvc">' . __( 'Card Code', 'woocommerce' ) . ' <span class="required">*</span></label>
+				<input id="' . esc_attr( $this_id ) . '-card-cvc" class="input-text wc-credit-card-form-card-cvc" inputmode="numeric" autocomplete="cc-cvc" autocorrect="no" autocapitalize="no" spellcheck="no" type="text" placeholder="' . esc_attr__( 'CVC', 'woocommerce' ) .'" name="'.esc_attr( $this_id ).'-card-cvc" />
+			</p>
+			<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
+			<script type="text/javascript">
+				$(function(){
+					try{
+						$(".wc-credit-card-form-card-expiry").mask("99/99",{placeholder:"mm/yy"});
+						// console.log("Masked");	
+					}catch(e){
+						console.log(e);	
+					}
+				}); 
+			</script>
+			'
+			,
+		);
+    return $default_fields; 
+}; 
+         
+// add the filter 
+add_filter( 'woocommerce_credit_card_form_fields', 'filter_woocommerce_credit_card_form_fields', 10, 2 );

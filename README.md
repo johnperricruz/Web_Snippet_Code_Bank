@@ -11,6 +11,7 @@ WP Modules :
 
 	-/custom_blog_template
 	-/custom_functions/pagination
+	- WooCommerce Custom CC Field
 
 --
 
