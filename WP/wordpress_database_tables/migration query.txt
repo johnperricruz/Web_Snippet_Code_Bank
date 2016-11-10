@@ -1,0 +1,2 @@
+UPDATE wp_postmeta SET meta_value = REPLACE(meta_value,'OLD','NEW')
+WHERE meta_key = '_menu_item_url'
