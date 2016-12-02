@@ -137,6 +137,16 @@ class Magento extends Mage_Catalog_Model_Product{
 		$product_obj = Mage::getModel('catalog/product')->load($product_iD);
 		return Mage::helper('catalog/product_compare')->getAddUrl($product_obj);
 	}	
+	public function isCompared($product_iD){
+		$compared = false;
+		$collection = $this->helper('catalog/product_compare')->getItemCollection();
+		foreach($collection as $comparing_product) {
+			if ($comparing_product->getId() === $product_iD) {
+				$compared = true;
+			}
+		}
+		return $compared;
+	}	
 	public function getProductImageUrl($prod,$size){
 		return $this->helper('catalog/image')->init($prod, 'small_image')->resize($size);
 	}
