@@ -8,7 +8,7 @@
 
 /************************************************************************************
 	On head.php
-	<?php require_once Mage::getBaseDir('base').DS.'functions/'.DS.'helper.php'; ?>
+	<?php require_once Mage::getBaseDir('base').DS.'functions/'.DS.'magento.php'; ?>
 	
 ************************************************************************************/
 
