@@ -8,7 +8,7 @@
 
 /************************************************************************************
 	On head.php
-	<?php require_once Mage::getBaseDir('base').DS.'functions/'.DS.'magento.php'; ?>
+	<?php require_once Mage::getBaseDir('base').DS.'functions/'.DS.'helper.php'; ?>
 	
 ************************************************************************************/
 
@@ -210,6 +210,27 @@ class Magento extends Mage_Catalog_Model_Product{
 	}
 	public function newsletterSuccessRedirect($cms){
 		return '<input type="hidden" name="uenc" value="'.Mage::helper('core')->urlEncode(Mage::app()->getStore()->getBaseUrl().$cms).'"/>';
+	}
+	public function getSkinCSS($file,$isSecure=false){
+		if($isSecure){
+			return  $this->getSkinUrl('css/'.$file.'',array('_secure'=>true));
+		}else{
+			return  $this->getSkinUrl('css/'.$file.'');
+		}
+	}
+	public function getSkinJS($file,$isSecure=false){
+		if($isSecure){
+			return  $this->getSkinUrl('js/'.$file.'',array('_secure'=>true));
+		}else{
+			return  $this->getSkinUrl('js/'.$file.'');
+		}
+	}
+	public function getSkinImages($file,$isSecure=false){
+		if($isSecure){
+			return  $this->getSkinUrl('images/'.$file.'',array('_secure'=>true));
+		}else{
+			return  $this->getSkinUrl('images/'.$file.'');
+		}
 	}
 	/*
 	* Test
