@@ -209,6 +209,7 @@ class Magento extends Mage_Catalog_Model_Product{
 		return '/wishlist'; 
 	}
 	public function newsletterSuccessRedirect($cms){
+		//Must add to newsletter form
 		return '<input type="hidden" name="uenc" value="'.Mage::helper('core')->urlEncode(Mage::app()->getStore()->getBaseUrl().$cms).'"/>';
 	}
 	public function getSkinCSS($file,$isSecure=false){
@@ -236,7 +237,7 @@ class Magento extends Mage_Catalog_Model_Product{
 	* Test
 	*/
 	public function debug(){
-		return "Helper class is connected";
+		return "Helper class is connected.";
 	}
 }
 ?>
