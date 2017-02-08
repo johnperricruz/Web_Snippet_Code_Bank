@@ -10,11 +10,11 @@ get_header(); ?>
 
       <?php
 
-		//$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+		$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 		$args = array(
 			'post_type'      => 'post', // You can add a custom post type if you like
 			'paged'          => $paged,
-			'posts_per_page' => 500
+			'posts_per_page' => 10
 		);
 		query_posts($args);  
 				
@@ -56,7 +56,7 @@ get_header(); ?>
 
 		<?php 
 		}
-			//my_pagination(); 
+			my_pagination(); 
 			wp_reset_postdata();
 		?>			
 			
