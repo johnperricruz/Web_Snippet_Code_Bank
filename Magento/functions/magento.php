@@ -213,19 +213,24 @@ class Magento extends Mage_Catalog_Model_Product{
 		return '<input type="hidden" name="uenc" value="'.Mage::helper('core')->urlEncode(Mage::app()->getStore()->getBaseUrl().$cms).'"/>';
 	}
 	public function getSkinCSS($file,$isSecure=false){
+		$css = '';
 		if($isSecure){
-			return  $this->getSkinUrl('css/'.$file.'',array('_secure'=>true));
+			$css = '<link rel="stylesheet" href="'.$this->getSkinUrl('css/'.$file.'',array('_secure'=>true)).'" />';
 		}else{
-			return  $this->getSkinUrl('css/'.$file.'');
+			$css = '<link rel="stylesheet" href="'.$this->getSkinUrl('css/'.$file.'').'" />';
 		}
+		return $css;
 	}
 	public function getSkinJS($file,$isSecure=false){
+		$js = '';
 		if($isSecure){
-			return  $this->getSkinUrl('js/'.$file.'',array('_secure'=>true));
+			$js = '<script type="text/javascript" src="'.$this->getSkinUrl('js/'.$file.'',array('_secure'=>true)).'" ></script>';
 		}else{
-			return  $this->getSkinUrl('js/'.$file.'');
+			$js = '<script type="text/javascript" src="'.$this->getSkinUrl('js/'.$file.'').'"></script>';
 		}
+		return $js;
 	}
+	
 	public function getSkinImages($file,$isSecure=false){
 		if($isSecure){
 			return  $this->getSkinUrl('images/'.$file.'',array('_secure'=>true));
