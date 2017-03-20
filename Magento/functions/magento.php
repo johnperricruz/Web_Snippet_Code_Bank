@@ -221,6 +221,9 @@ class Magento extends Mage_Catalog_Model_Product{
 		}
 		return $css;
 	}
+	public function getExternalCSS($css){
+		return '<link href="'.$css.'" type="text/css" rel="stylesheet" />';
+	}
 	public function getSkinJS($file,$isSecure=false){
 		$js = '';
 		if($isSecure){
