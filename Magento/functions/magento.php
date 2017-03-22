@@ -117,9 +117,10 @@ class Magento extends Mage_Catalog_Model_Product{
 		$collection->addCategoryFilter($category_model);  							  //category filter
 		$collection->addAttributeToFilter('status',1);                                //only enabled product
 		$collection->addAttributeToFilter('visibility',4); 
-		$collection->addAttributeToSelect(array('description','name','url','small_image','price')); //add product attribute to be fetched
+		$collection->addAttributeToSelect(array('description','name','url','small_image','price','url_key')); //add product attribute to be fetched
 		//$collection->getSelect()->order('rand()');                                  //Uncomment for random fetching of product in the homepage.
 		$collection->addStoreFilter(); 
+		$collection->addAttributeToSort('position', 'DESC');
 		return $collection; 
 		$collection->clear();
 	}
@@ -128,7 +129,7 @@ class Magento extends Mage_Catalog_Model_Product{
 	}
 	public function getFormKey(){
 		return Mage::getSingleton('core/session')->getFormKey(); 
-	}	
+	}	 
 	public function addToWishlist($product_iD){
 		return "/wishlist/index/add/product/".$product_iD."/form_key/".Mage::getSingleton('core/session')->getFormKey()."/";
 	}
@@ -148,15 +149,14 @@ class Magento extends Mage_Catalog_Model_Product{
 		return $compared;
 	}	
 	public function getProductImageUrl($prod,$size){
-		return $this->helper('catalog/image')->init($prod, 'small_image')->resize($size);
+		return $this->helper('catalog/image')->init($prod, 'small_image')->keepFrame(false)->resize($size);
 	}
 	/*
 	* Account
 	*/
 	public function isLoggedIn(){
 		$action = $this->helper('customer')->isLoggedIn();
-		if($action){ return true;}
-		else{ return false;}
+		return ($action) ? true : false;
 	}
 	public function getAccountUrl($mode){
 		$link = "#";
@@ -209,43 +209,26 @@ class Magento extends Mage_Catalog_Model_Product{
 		return '/wishlist'; 
 	}
 	public function newsletterSuccessRedirect($cms){
-		//Must add to newsletter form
 		return '<input type="hidden" name="uenc" value="'.Mage::helper('core')->urlEncode(Mage::app()->getStore()->getBaseUrl().$cms).'"/>';
 	}
 	public function getSkinCSS($file,$isSecure=false){
-		$css = '';
 		if($isSecure){
-			$css = '<link rel="stylesheet" href="'.$this->getSkinUrl('css/'.$file.'',array('_secure'=>true)).'" />';
+			return  $this->getSkinUrl('css/'.$file.'',array('_secure'=>true));
 		}else{
-			$css = '<link rel="stylesheet" href="'.$this->getSkinUrl('css/'.$file.'').'" />';
+			return  $this->getSkinUrl('css/'.$file.'');
 		}
-		return $css;
-	}
-	public function getExternalCSS($css){
-		return '<link href="'.$css.'" type="text/css" rel="stylesheet" />';
 	}
 	public function getSkinJS($file,$isSecure=false){
-		$js = '';
-		if($isSecure){
-			$js = '<script type="text/javascript" src="'.$this->getSkinUrl('js/'.$file.'',array('_secure'=>true)).'" ></script>';
-		}else{
-			$js = '<script type="text/javascript" src="'.$this->getSkinUrl('js/'.$file.'').'"></script>';
-		}
-		return $js;
+		return ($isSecure) ? $this->getSkinUrl('js/'.$file.'',array('_secure'=>true)) : $this->getSkinUrl('js/'.$file.'');
 	}
-	
 	public function getSkinImages($file,$isSecure=false){
-		if($isSecure){
-			return  $this->getSkinUrl('images/'.$file.'',array('_secure'=>true));
-		}else{
-			return  $this->getSkinUrl('images/'.$file.'');
-		}
+		return ($isSecure) ? $this->getSkinUrl('images/'.$file.'',array('_secure'=>true)) : $this->getSkinUrl('images/'.$file.'');
 	}
 	/*
 	* Test
 	*/
 	public function debug(){
-		return "Helper class is connected.";
+		return "Helper class is connected";
 	}
 }
 ?>
