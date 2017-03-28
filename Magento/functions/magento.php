@@ -75,8 +75,7 @@ class Magento extends Mage_Catalog_Model_Product{
 		return $return; 
 	}
 	public function getCategoryObject(){
-		$id = Mage::registry('current_category')->getId();
-		return Mage::getModel('catalog/category')->load($id);		
+		return Mage::getSingleton('catalog/layer')->getCurrentCategory();		
 	}
 	public function getBestSeller($categoryId){
 		$category = Mage::getModel('catalog/category')->load($categoryId);
