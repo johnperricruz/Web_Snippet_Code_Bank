@@ -37,7 +37,7 @@ class Magento extends Mage_Catalog_Model_Product{
 	public function getCategoryTree(){
 		$_helper = Mage::helper('catalog/category'); 
 		$_categories = $_helper->getStoreCategories();
-		$current_category = Mage::registry('current_category')->getId();
+		$current_category = Mage::getSingleton('catalog/layer')->getCurrentCategory()->getId();
 		
 		$return = "";
 				$return .= '<ul class="nav navbar-nav">';
@@ -75,7 +75,7 @@ class Magento extends Mage_Catalog_Model_Product{
 		return $return; 
 	}
 	public function getCategoryObject(){
-		return Mage::getSingleton('catalog/layer')->getCurrentCategory();		
+		return Mage::getSingleton('catalog/layer')->getCurrentCategory();
 	}
 	public function getBestSeller($categoryId){
 		$category = Mage::getModel('catalog/category')->load($categoryId);
@@ -126,10 +126,9 @@ class Magento extends Mage_Catalog_Model_Product{
 		$collection->addCategoryFilter($category_model);  							  //category filter
 		$collection->addAttributeToFilter('status',1);                                //only enabled product
 		$collection->addAttributeToFilter('visibility',4); 
-		$collection->addAttributeToSelect(array('description','name','url','small_image','price','url_key')); //add product attribute to be fetched
+		$collection->addAttributeToSelect(array('description','name','url','small_image','price')); //add product attribute to be fetched
 		//$collection->getSelect()->order('rand()');                                  //Uncomment for random fetching of product in the homepage.
 		$collection->addStoreFilter(); 
-		$collection->addAttributeToSort('position', 'DESC');
 		return $collection; 
 		$collection->clear();
 	}
@@ -138,7 +137,7 @@ class Magento extends Mage_Catalog_Model_Product{
 	}
 	public function getFormKey(){
 		return Mage::getSingleton('core/session')->getFormKey(); 
-	}	 
+	}	
 	public function addToWishlist($product_iD){
 		return "/wishlist/index/add/product/".$product_iD."/form_key/".Mage::getSingleton('core/session')->getFormKey()."/";
 	}
@@ -158,14 +157,15 @@ class Magento extends Mage_Catalog_Model_Product{
 		return $compared;
 	}	
 	public function getProductImageUrl($prod,$size){
-		return $this->helper('catalog/image')->init($prod, 'small_image')->keepFrame(false)->resize($size);
+		return $this->helper('catalog/image')->init($prod, 'small_image')->resize($size);
 	}
 	/*
 	* Account
 	*/
 	public function isLoggedIn(){
 		$action = $this->helper('customer')->isLoggedIn();
-		return ($action) ? true : false;
+		if($action){ return true;}
+		else{ return false;}
 	}
 	public function getAccountUrl($mode){
 		$link = "#";
@@ -218,26 +218,46 @@ class Magento extends Mage_Catalog_Model_Product{
 		return '/wishlist'; 
 	}
 	public function newsletterSuccessRedirect($cms){
+		//Must add to newsletter form
 		return '<input type="hidden" name="uenc" value="'.Mage::helper('core')->urlEncode(Mage::app()->getStore()->getBaseUrl().$cms).'"/>';
 	}
 	public function getSkinCSS($file,$isSecure=false){
+		$css = '';
 		if($isSecure){
-			return  $this->getSkinUrl('css/'.$file.'',array('_secure'=>true));
+			$css = '<link rel="stylesheet" href="'.$this->getSkinUrl('css/'.$file.'',array('_secure'=>true)).'" />';
 		}else{
-			return  $this->getSkinUrl('css/'.$file.'');
+			$css = '<link rel="stylesheet" href="'.$this->getSkinUrl('css/'.$file.'').'" />';
 		}
+		return $css;
+	}
+	public function getExternalCSS($css){
+		return '<link href="'.$css.'" type="text/css" rel="stylesheet" />';
+	}
+	public function getExternalJS($js){
+		return '<script type="text/javascript" src="'.$js.'" ></script>';
 	}
 	public function getSkinJS($file,$isSecure=false){
-		return ($isSecure) ? $this->getSkinUrl('js/'.$file.'',array('_secure'=>true)) : $this->getSkinUrl('js/'.$file.'');
+		$js = '';
+		if($isSecure){
+			$js = '<script type="text/javascript" src="'.$this->getSkinUrl('js/'.$file.'',array('_secure'=>true)).'" ></script>';
+		}else{
+			$js = '<script type="text/javascript" src="'.$this->getSkinUrl('js/'.$file.'').'"></script>';
+		}
+		return $js;
 	}
+	
 	public function getSkinImages($file,$isSecure=false){
-		return ($isSecure) ? $this->getSkinUrl('images/'.$file.'',array('_secure'=>true)) : $this->getSkinUrl('images/'.$file.'');
+		if($isSecure){
+			return  $this->getSkinUrl('images/'.$file.'',array('_secure'=>true));
+		}else{
+			return  $this->getSkinUrl('images/'.$file.'');
+		}
 	}
 	/*
 	* Test
 	*/
 	public function debug(){
-		return "Helper class is connected";
+		return "Helper class is connected.";
 	}
 }
 ?>
