@@ -37,33 +37,42 @@ class Magento extends Mage_Catalog_Model_Product{
 	public function getCategoryTree(){
 		$_helper = Mage::helper('catalog/category'); 
 		$_categories = $_helper->getStoreCategories();
+		$current_category = Mage::registry('current_category')->getId();
+		
 		$return = "";
-		$return = '<div id="cssmenu" class="mobile category-tree">';
-			$return .= '<ul>';
-				foreach($_categories as $_category){
-					$_category = Mage::getModel('catalog/category')->load($_category->getId());
-					$_subcategories = $_category->getChildrenCategories();
-				
-					if ($_category->getIsActive()) {					
-						if(count($_subcategories)!=0){						
-							$return .= '<li class="'.strtolower( preg_replace('/\s+/', '-', $_category->getName())).'"><a href="'.$_category->getUrl().'">'.$_category->getName().'</a>'; 
-								$return .= '<ul>';
-									foreach($_subcategories as $_subcategory){
-										if ($_subcategory->getIsActive()) {	
-											$return .= '<li><a href="'.$_subcategory->getUrl().'">'.$_subcategory->getName().'</a></li>';
-										}
-									}
-								$return .= '</li></ul>';
+				$return .= '<ul class="nav navbar-nav">';
+					foreach($_categories as $_category){
+						
+						if ($current_category == $_category->getId()){
+							$active = 'active';
+						}else{
+							$active = '';
 						}
-						else{
-							$return .= '<li class="'.strtolower( preg_replace('/\s+/', '-', $_category->getName())).'"><a href="'.$_category->getUrl().'">'.$_category->getName().'</a></li>'; 
+						
+						$_category = Mage::getModel('catalog/category')->load($_category->getId());
+						$_subcategories = $_category->getChildrenCategories();
+						
+						if ($_category->getIsActive()) {					
+							if(count($_subcategories)!=0){						
+								$return .= '<li class="'.$active.' '.strtolower( preg_replace('/\s+/', '-', $_category->getName())).'"><a href="'.$_category->getUrl().'">'.$_category->getName().'</a>'; 
+									$return .= '<ul>';
+										foreach($_subcategories as $_subcategory){
+											if ($_subcategory->getIsActive()) {	
+												$return .= '<li '.$active.' ><a href="'.$_subcategory->getUrl().'">'.$_subcategory->getName().'</a></li>';
+											}
+										}
+									$return .= '</li></ul>';
+							}
+							else{
+								$return .= '<li class="'.$active.' '.strtolower( preg_replace('/\s+/', '-', $_category->getName())).'"><a href="'.$_category->getUrl().'">'.$_category->getName().'</a></li>'; 
+							}
 						}
 					}
-				}
-			$return .= '</ul>';
-		$return .='</div>';
+				$return .= '
+				<li class="search"><a href="#"><span class="fa fa-search"></span></a></li>
+				</ul>';
 		
-		return $return;
+		return $return; 
 	}
 	public function getCategoryObject(){
 		$id = Mage::registry('current_category')->getId();
