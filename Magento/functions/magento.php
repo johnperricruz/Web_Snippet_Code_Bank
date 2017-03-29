@@ -33,6 +33,7 @@ class Magento extends Mage_Catalog_Model_Product{
 			}
 		$ret .=  '</ul>';
 		return $ret;
+	}	
 	public function getCategoryTree(){
 		$_helper = Mage::helper('catalog/category'); 
 		$_categories = $_helper->getStoreCategories();
@@ -43,7 +44,7 @@ class Magento extends Mage_Catalog_Model_Product{
 						
 						if ($current_category == $_category->getId()){
 							$active = 'active';
-						}else{
+						}else{ 
 							$active = '';
 						}
 						
@@ -51,9 +52,9 @@ class Magento extends Mage_Catalog_Model_Product{
 						$_subcategories = $_category->getChildrenCategories();
 						
 						if ($_category->getIsActive()) {					
-							if(count($_subcategories)!=0){						
+							if(count($_subcategories)!=0){				 		
 								$return .= '<li  class="dropdown '.strtolower( preg_replace('/\s+/', '-', $_category->getName())).'">
-								<a href="'.$_category->getUrl().'" class="dropdown-toggle" data-toggle="dropdown" >'.$_category->getName().' <span class="caret"></span></a>'; 
+								<a href="'.$_category->getUrl().'" class="dropdown-toggle" aria-expanded="false" data-toggle="" >'.$_category->getName().' <span class="caret"></span></a>'; 
 									$return .= '<ul class="dropdown-menu">';
 										foreach($_subcategories as $_subcategory){
 											if ($_subcategory->getIsActive()) {	
