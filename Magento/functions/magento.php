@@ -25,13 +25,13 @@ class Magento extends Mage_Catalog_Model_Product{
 		$ret="";
 		$ret='<ul>';
 			foreach ($children as $category) {
-				if(self::getCategoryOnCategoryPage() == $category->getName()){
+				if(self::getCategoryObject()->getName() == $category->getName()){
 					$ret .= '<li class="active"><a href="'.$category->getUrl().'">'.$category->getName().' ('.$category->getProductCount().')</a></li>';
 				}else{
 					$ret .= '<li><a href="'.$category->getUrl().'">'.$category->getName().' ('.$category->getProductCount().')</a></li>';
 				}
 			}
-		$ret .=  '</ul>';
+		$ret .=  '</ul>'; 
 		return $ret;
 	}	
 	public function getCategoryTree(){
