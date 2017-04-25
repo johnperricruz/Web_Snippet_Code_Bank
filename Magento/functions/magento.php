@@ -133,6 +133,9 @@ class Magento extends Mage_Catalog_Model_Product{
 		return $collection; 
 		$collection->clear();
 	}
+	public function getCurrentProduct(){
+		return Mage::registry('current_product');
+	}
 	public function getProductViaID($product_id){
 		return Mage::getModel('catalog/product')->load($product_id); 
 	}

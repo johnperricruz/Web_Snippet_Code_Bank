@@ -26,3 +26,4 @@
 	}
 	
 	add_shortcode('recent-posts', 'pull_blog_posts'); //recent posts
+	//[recent-posts posts=4 cat=4 template="homepage-news-and-updates"]
