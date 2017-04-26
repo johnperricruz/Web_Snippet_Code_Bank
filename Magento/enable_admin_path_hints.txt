@@ -1,0 +1,11 @@
+/app/etc/local.xml
+  <websites>
+        <admin>
+            <dev>
+                <debug>
+                    <template_hints>0</template_hints>
+                    <template_hints_blocks>0</template_hints_blocks>
+                </debug>
+            </dev>
+        </admin>
+    </websites>

@@ -1,0 +1,12 @@
+/app/etc/local.xml
+	<stores>
+		<admin>
+			<design>
+				<theme>
+					<template>jpc</template>
+				</theme>
+			</design>
+		</admin>
+	</stores>
+	 
+
